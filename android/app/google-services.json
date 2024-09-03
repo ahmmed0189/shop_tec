@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "5010735255",
+    "project_id": "provisiontec-2761f",
+    "storage_bucket": "provisiontec-2761f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:5010735255:android:146790ff04ba8edff129d2",
+        "android_client_info": {
+          "package_name": "com.Provision.shopTe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnJb37RMMIp_j9qyFNdoXqi6_uPzVE6Lk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
