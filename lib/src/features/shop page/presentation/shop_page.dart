@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:provider/provider.dart';
+
 import 'package:shop_tec/src/components/my_drawer.dart';
 import 'package:shop_tec/src/components/produkt_titel.dart';
+import 'package:shop_tec/src/data/data_repository.dart';
 import 'package:shop_tec/src/features/overview/domain/product.dart';
 
 class ShopPage extends StatefulWidget {
@@ -13,23 +17,11 @@ class ShopPage extends StatefulWidget {
 class _ShopPageState extends State<ShopPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final List<Product> _product = [
-    Product(
-        id: "1",
-        name: "Rolex",
-        description: "dumy",
-        price: 102.0,
-        imageUrl: "assets/product/product.png"),
-    Product(
-        id: "1",
-        name: "Rolex",
-        description: "dumy",
-        price: 102.0,
-        imageUrl: "assets/product/product.png"),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    // Zugriff auf den DatabaseRepository innerhalb von build
+    final databaseRepository = Provider.of<DatabaseRepository>(context);
+
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Theme.of(context).colorScheme.surface,
@@ -190,20 +182,75 @@ class _ShopPageState extends State<ShopPage> {
             left: 63,
             top: 350,
             child: SizedBox(
-              height: 290,
-              width: MediaQuery.of(context).size.width - 85,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: _product.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                      padding: const EdgeInsets.only(right: 20.0),
-                      child: ProduktTitel(imageUrl: _product[index].imageUrl));
+              height: 300,
+              width: MediaQuery.of(context).size.width - 60,
+              child: FutureBuilder<List<Product>>(
+                future: databaseRepository
+                    .getProducts(), // Produkte aus Datenbank laden
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return const Icon(Icons.error);
+                  } else if (snapshot.hasData) {
+                    List<Product> products = snapshot.data!;
+                    return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: products.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 20.0),
+                          child: ProduktTitel(product: products[index]),
+                        );
+                      },
+                    );
+                  } else {
+                    return const Center(child: Text('No products available'));
+                  }
                 },
               ),
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: Container(
+        color: const Color.fromARGB(255, 237, 236, 236),
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+        child: GNav(
+          rippleColor: const Color.fromARGB(255, 157, 25, 25),
+          hoverColor: const Color.fromARGB(255, 119, 86, 86),
+          haptic: true,
+          tabBorderRadius: 15,
+          tabActiveBorder: Border.all(color: Colors.black, width: 1),
+          tabBorder: Border.all(color: Colors.grey, width: 1),
+          tabShadow: [
+            BoxShadow(
+                color: const Color.fromARGB(255, 106, 139, 94).withOpacity(0.5),
+                blurRadius: 8)
+          ],
+          curve: Curves.easeOutExpo,
+          duration: const Duration(milliseconds: 900),
+          gap: 8,
+          color: Colors.grey[800],
+          activeColor: Colors.purple,
+          iconSize: 24,
+          tabBackgroundColor: Colors.purple.withOpacity(0.1),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+          tabs: const [
+            GButton(
+              icon: Icons.home,
+              text: 'Home',
+            ),
+            GButton(
+              icon: Icons.settings,
+              text: 'Setting',
+            ),
+            GButton(
+              icon: Icons.usb,
+              text: 'Profile',
+            ),
+          ],
+        ),
       ),
     );
   }
