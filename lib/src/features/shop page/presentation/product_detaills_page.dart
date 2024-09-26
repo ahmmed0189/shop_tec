@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_tec/src/data/auth_repository.dart';
 import 'package:shop_tec/src/data/data_repository.dart';
-
 import 'package:shop_tec/src/features/cart/presentation/cart_page.dart';
 import 'package:shop_tec/src/features/overview/domain/product.dart';
 
@@ -23,9 +22,9 @@ class ProductDetailPage extends StatelessWidget {
         children: <Widget>[
           Container(
             height: size.height * .32,
-            decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 222, 194, 122),
-              borderRadius: BorderRadius.only(
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.secondary,
+              borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(20),
                   bottomRight: Radius.circular(20)),
             ),
@@ -56,7 +55,7 @@ class ProductDetailPage extends StatelessWidget {
                       ),
                       child: const Center(
                         child: Icon(
-                          Icons.shopping_cart, // Icon in the center
+                          Icons.shopping_cart,
                           color: Color.fromARGB(255, 191, 176, 42),
                           size: 28,
                         ),
@@ -249,20 +248,28 @@ class ProductDetailPage extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: 50,
+            left: 85,
             bottom: 40,
-            child: GestureDetector(
-              onTap: () {
-                // Hier wird das Produkt dem Warenkorb hinzugefügt
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Theme.of(context).colorScheme.secondary,
+                padding: const EdgeInsets.symmetric(
+                  vertical: 15.0,
+                  horizontal: 80.0,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+              ),
+              onPressed: () {
                 var repository =
                     Provider.of<DatabaseRepository>(context, listen: false);
                 repository.addToCart(product);
 
-                // Zeige eine Bestätigung
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Product added to cart')),
                 );
-                // Nach dem Hinzufügen zur CartPage navigieren
+
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -272,35 +279,12 @@ class ProductDetailPage extends StatelessWidget {
                   ),
                 );
               },
-              child: Container(
-                width: 320,
-                height: 55,
-                clipBehavior: Clip.antiAlias,
-                decoration: ShapeDecoration(
-                  color: const Color(0xFF3673B4),
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(width: 3),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  shadows: [
-                    BoxShadow(
-                      color: Theme.of(context).colorScheme.primary,
-                      blurRadius: 2.70,
-                      offset: const Offset(0, 0),
-                      spreadRadius: 0,
-                    )
-                  ],
-                ),
-                child: const Center(
-                  child: Text(
-                    'Add to Cart',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+              child: Text(
+                'Add to Cart',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSecondary,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),

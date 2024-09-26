@@ -128,7 +128,11 @@ class _CartPageState extends State<CartPage> {
             ontap: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const PaymentPage(),
+                builder: (context) => PaymentPage(
+                  cart: cart, // Pass the cart products
+                  totalPrice: totalPrice, username: '',
+                  address: '', userId: '', // Pass the total price
+                ),
               ),
             ),
             text:

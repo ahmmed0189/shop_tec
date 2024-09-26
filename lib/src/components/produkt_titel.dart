@@ -36,8 +36,8 @@ class ProduktTitel extends StatelessWidget {
                 const SizedBox(height: 10),
                 Text(
                   product.name, // Dynamischer Produktname
-                  style: const TextStyle(
-                    color: Colors.amber,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.secondary,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

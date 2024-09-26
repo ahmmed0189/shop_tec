@@ -23,7 +23,9 @@ class Button extends StatelessWidget {
             borderRadius: BorderRadius.circular(12), // Abgerundete Ecken
           ),
         ),
-        child: Text(text),
+        child: Text(
+          text,
+        ),
       ),
     );
   }

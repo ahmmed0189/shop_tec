@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:provider/provider.dart';
-
+import 'package:shop_tec/src/components/custom_bottom_navigation_bar.dart';
 import 'package:shop_tec/src/components/my_drawer.dart';
 import 'package:shop_tec/src/components/produkt_titel.dart';
 import 'package:shop_tec/src/data/data_repository.dart';
 import 'package:shop_tec/src/features/overview/domain/product.dart';
+// Passe den Import an
 
 class ShopPage extends StatefulWidget {
   const ShopPage({super.key});
@@ -213,45 +213,7 @@ class _ShopPageState extends State<ShopPage> {
           ),
         ],
       ),
-      bottomNavigationBar: Container(
-        color: const Color.fromARGB(255, 237, 236, 236),
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-        child: GNav(
-          rippleColor: const Color.fromARGB(255, 157, 25, 25),
-          hoverColor: const Color.fromARGB(255, 119, 86, 86),
-          haptic: true,
-          tabBorderRadius: 15,
-          tabActiveBorder: Border.all(color: Colors.black, width: 1),
-          tabBorder: Border.all(color: Colors.grey, width: 1),
-          tabShadow: [
-            BoxShadow(
-                color: const Color.fromARGB(255, 106, 139, 94).withOpacity(0.5),
-                blurRadius: 8)
-          ],
-          curve: Curves.easeOutExpo,
-          duration: const Duration(milliseconds: 900),
-          gap: 8,
-          color: Colors.grey[800],
-          activeColor: Colors.purple,
-          iconSize: 24,
-          tabBackgroundColor: Colors.purple.withOpacity(0.1),
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-          tabs: const [
-            GButton(
-              icon: Icons.home,
-              text: 'Home',
-            ),
-            GButton(
-              icon: Icons.settings,
-              text: 'Setting',
-            ),
-            GButton(
-              icon: Icons.usb,
-              text: 'Profile',
-            ),
-          ],
-        ),
-      ),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
     );
   }
 }
