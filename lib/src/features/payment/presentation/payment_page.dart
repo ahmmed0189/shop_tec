@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:shop_tec/src/components/button.dart';
-
 import 'package:shop_tec/src/features/delveryprogress/presentation/deliveryprogress_page.dart';
 import 'package:shop_tec/src/features/overview/domain/product.dart';
 
@@ -15,9 +14,9 @@ class PaymentPage extends StatefulWidget {
   const PaymentPage({
     required this.cart,
     required this.totalPrice,
-    required this.username, // Add username parameter
-    required this.address, // Add address parameter
-    required this.userId, // Pass userId parameter
+    required this.username,
+    required this.address,
+    required this.userId,
     super.key,
   });
 
@@ -33,10 +32,11 @@ class _PaymentPageState extends State<PaymentPage> {
   String cvvCode = '';
   bool isCvvFocused = false;
 
-  // User wants to pay
+  // This method is called when the user taps "Pay now"
   void userTappedPay() {
+    // Validate the form before proceeding
     if (formKey.currentState?.validate() ?? false) {
-      // Only show dialog if form is valid
+      // Show a confirmation dialog before navigating to DeliveryProgressPage
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -52,29 +52,24 @@ class _PaymentPageState extends State<PaymentPage> {
             ),
           ),
           actions: [
-            // Cancel button
+            // Cancel button to dismiss the dialog
             TextButton(
               onPressed: () => Navigator.pop(context),
               child: const Text('Cancel'),
             ),
-            // Yes button
+            // Yes button to proceed with the payment and navigate
             TextButton(
               onPressed: () {
-                // Navigate to the delivery progress page with user details
+                // Navigate to DeliveryProgressPage with correct data
                 Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DeliveryProgressPage(
-                      username: widget.username, // Pass the actual username
-                      address: widget.address, // Pass the actual address
-                      orderedProducts: widget.cart, // Pass the cart products
-                      totalPrice: widget.totalPrice, // Pass the total price
-                      userId: widget.userId, // Pass the actual user ID
-                      // Pass the total price
-                      // Pass the actual user ID
-                    ),
-                  ),
-                );
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DeliveryProgressPage(
+                        products: widget.cart, // Übergibt die Produktliste
+                        totalPrice:
+                            widget.totalPrice, // Übergibt den Gesamtpreis),
+                      ),
+                    ));
               },
               child: const Text('Yes'),
             ),
@@ -95,7 +90,7 @@ class _PaymentPageState extends State<PaymentPage> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // Credit card
+            // Credit card widget to display entered details
             CreditCardWidget(
               cardNumber: cardNumber,
               expiryDate: expiryDate,
@@ -104,7 +99,7 @@ class _PaymentPageState extends State<PaymentPage> {
               showBackView: isCvvFocused,
               onCreditCardWidgetChange: (p0) {},
             ),
-            // Credit card form
+            // Credit card form for user input
             CreditCardForm(
               cardNumber: cardNumber,
               expiryDate: expiryDate,
@@ -121,6 +116,7 @@ class _PaymentPageState extends State<PaymentPage> {
               formKey: formKey,
             ),
             const Spacer(),
+            // Pay now button
             Button(ontap: userTappedPay, text: "Pay now"),
             const SizedBox(height: 25),
           ],

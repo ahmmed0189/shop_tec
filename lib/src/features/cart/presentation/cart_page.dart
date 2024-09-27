@@ -129,9 +129,11 @@ class _CartPageState extends State<CartPage> {
               context,
               MaterialPageRoute(
                 builder: (context) => PaymentPage(
-                  cart: cart, // Pass the cart products
-                  totalPrice: totalPrice, username: '',
-                  address: '', userId: '', // Pass the total price
+                  cart: cart, // Übergibt die Produkte
+                  totalPrice: totalPrice, // Übergibt den Gesamtpreis
+                  username: '', // Füge Benutzernamen hinzu
+                  address: '', // Füge Adresse hinzu
+                  userId: '', // Übergibt die User-ID
                 ),
               ),
             ),

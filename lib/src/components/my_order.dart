@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:shop_tec/src/features/overview/domain/product.dart';
 
 class MyOrder extends StatelessWidget {
@@ -27,9 +27,13 @@ class MyOrder extends StatelessWidget {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 20),
-          Text("Username: $username", style: const TextStyle(fontSize: 18)),
+          Text("Username: $username",
+              style: const TextStyle(
+                  fontSize: 18)), // Make sure username is being passed
           const SizedBox(height: 10),
-          Text("Address: $address", style: const TextStyle(fontSize: 18)),
+          Text("Address: $address",
+              style: const TextStyle(
+                  fontSize: 18)), // Make sure address is being passed
           const SizedBox(height: 20),
           const Text(
             "Ordered Products:",
@@ -54,4 +58,4 @@ class MyOrder extends StatelessWidget {
       ),
     );
   }
-}
+}*/
