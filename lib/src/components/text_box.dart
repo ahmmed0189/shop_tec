@@ -26,7 +26,7 @@ class TextBox extends StatelessWidget {
             children: [
               Text(
                 sectionName,
-                style: TextStyle(color: Colors.grey[500]),
+                style: TextStyle(color: const Color.fromARGB(255, 10, 8, 8)),
               ),
 
               // Edit button
@@ -34,13 +34,16 @@ class TextBox extends StatelessWidget {
                 onPressed: onPressed,
                 icon: Icon(
                   Icons.settings,
-                  color: Colors.grey[400],
+                  color: const Color.fromARGB(255, 29, 26, 26),
                 ),
               ),
             ],
           ),
           // text
-          Text(text),
+          Text(
+            text,
+            style: TextStyle(color: Color.fromARGB(255, 40, 160, 162)),
+          ),
         ],
       ),
     );

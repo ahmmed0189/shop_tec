@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shop_tec/src/components/button.dart';
 import 'package:shop_tec/src/features/overview/domain/product.dart';
+import 'package:shop_tec/src/features/shop%20page/presentation/shop_page.dart';
 
 class DeliveryProgressPage extends StatefulWidget {
   final List<Product> products; // Liste der gekauften Produkte
@@ -125,6 +127,19 @@ class _DeliveryProgressPageState extends State<DeliveryProgressPage> {
                   color: Colors.amber,
                   fontWeight: FontWeight.bold,
                   fontSize: 20),
+            ),
+            const SizedBox(
+              height: 150,
+            ),
+            Center(
+              child: Button(
+                  ontap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ShopPage(),
+                        ),
+                      ),
+                  text: 'Home'),
             ),
           ],
         ),

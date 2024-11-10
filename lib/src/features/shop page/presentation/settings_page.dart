@@ -8,6 +8,8 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Settings"),
@@ -28,18 +30,17 @@ class SettingsPage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // dark mode
+                // Dark Mode Text
                 Text("Dark Mode",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).colorScheme.primary)),
 
+                // Switch für Dark Mode mit Shared Preferences
                 CupertinoSwitch(
-                    value: Provider.of<ThemeProvider>(context, listen: false)
-                        .isDarkMode,
-                    onChanged: (value) =>
-                        Provider.of<ThemeProvider>(context, listen: false)
-                            .toggleTheme()),
+                  value: themeProvider.isDarkMode,
+                  onChanged: (value) => themeProvider.toggleTheme(),
+                ),
               ],
             ),
           ),

@@ -5,7 +5,6 @@ import 'package:shop_tec/src/components/my_drawer.dart';
 import 'package:shop_tec/src/components/produkt_titel.dart';
 import 'package:shop_tec/src/data/data_repository.dart';
 import 'package:shop_tec/src/features/overview/domain/product.dart';
-// Passe den Import an
 
 class ShopPage extends StatefulWidget {
   const ShopPage({super.key});
@@ -185,8 +184,7 @@ class _ShopPageState extends State<ShopPage> {
               height: 300,
               width: MediaQuery.of(context).size.width - 60,
               child: FutureBuilder<List<Product>>(
-                future: databaseRepository
-                    .getProducts(), // Produkte aus Datenbank laden
+                future: databaseRepository.getProducts(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
@@ -213,7 +211,7 @@ class _ShopPageState extends State<ShopPage> {
           ),
         ],
       ),
-      bottomNavigationBar: const CustomBottomNavigationBar(),
+      bottomNavigationBar: CustomBottomNavigationBar(),
     );
   }
 }

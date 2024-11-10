@@ -28,6 +28,14 @@ class CustomBottomNavigationBar extends StatelessWidget {
               ),
             ),
             GButton(
+              icon: Icons.shopping_cart_sharp,
+              text: 'Cart',
+              textStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
+            GButton(
               icon: Icons.settings,
               text: 'Settings',
               textStyle: TextStyle(
